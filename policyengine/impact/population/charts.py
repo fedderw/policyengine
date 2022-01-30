@@ -386,6 +386,14 @@ def intra_decile_chart(
     )
     for i in range(5):
         fig.data[i].showlegend = False
+
+    # Change legend orientation to horizontal and place above chart
+    fig.update_layout(
+        legend=dict(
+            orientation="h", yanchor="bottom", y=1.02, xanchor="left", x=0
+        )
+    )
+
     return charts.formatted_fig_json(fig)
 
 
