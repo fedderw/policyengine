@@ -165,6 +165,20 @@ function UsageExplanations(props) {
   );
 }
 
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    console.log(entry)
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show')
+    } else {
+      entry.target.classList.remove('show')
+    }
+  })
+})
+
+const hiddenElements = document.querySelectorAll('.hidden')
+hiddenElements.forEach(el => observer.observe(el))
+
 function LandingPageContent() {
   const inUs = window.navigator.language === "en-US";
   const ukLink = "uk/policy";
@@ -173,12 +187,16 @@ function LandingPageContent() {
   return (
     <div className="mx-auto flex flex-col text-center lg:px-8 bg-white isolate -z-10">
       <div className="my-4 lg:pt-8 flex flex-col gap-4">
+        <section class="hidden">
         <h1 className="text-slate-700 font-bold text-3xl md:text-4xl text-center">
           Compute the impact of public policy
         </h1>
+        </section>
+        <section class="hidden">
         <div className="text-[#0b5394] text-xl md:text-2xl">
           Estimate your taxes and benefits
         </div>
+        </section>
         <div className="text-[#0b5394] text-xl md:text-2xl">
           Imagine custom economic policy reforms
         </div>
